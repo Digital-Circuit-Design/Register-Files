@@ -15,7 +15,7 @@
 </p>
 
 <h1 align="center">
-  Introduction to the simulation environment
+  Register Files
 </h1>
 
 <p align="center">
@@ -45,10 +45,8 @@
 
 # Project Overview
 
-The project focuses on implementing fundamental **digital logic components** using **VHDL** and verifying their functionality through simulation in the **ModelSim Altera Starter Edition** environment.  
-Each circuit includes:
-- A **Dataflow Architecture** implementation
-- A dedicated **testbench** for functional verification
+The project focuses on modeling, simulating, and verifying **sequential logic circuits** using **VHDL**.  
+Each circuit is implemented using a clear architectural style and is accompanied by a **testbench** to validate its behavior under different timing and control conditions.
 
 ---
 
@@ -58,53 +56,85 @@ Each circuit includes:
 | Section | Folder / File | Description |
 |------:|---------------|-------------|
 | 1 | `assign/` | Laboratory assignment material |
-| 1.1 | `assign/Lab3_UniWA-BSc-DSD_VHDL#1.pdf` | Laboratory exercise description (English) |
-| 1.2 | `assign/Εργαστήριο3_ΠΑΔΑ_Βασική-ΣΨΣ_VHDL.pdf` | Laboratory exercise description (Greek) |
-| 2 | `docs/` | Simulation environment documentation |
-| 2.1 | `docs/Introduction-to-the-simulation-environment.txt` | Introduction to the VHDL simulation environment (English) |
-| 2.2 | `docs/Εισαγωγή-στο-περιβάλλον-προσομοίωσης.txt` | Introduction to the VHDL simulation environment (Greek) |
-| 3 | `src/` | VHDL source code and testbenches |
-| 3.1 | `src/ha.vhd` | Half Adder (VHDL implementation) |
-| 3.2 | `src/ha_tb.vhd` | Half Adder testbench |
-| 3.3 | `src/fa.vhd` | Full Adder (VHDL implementation) |
-| 3.4 | `src/fa_tb.vhd` | Full Adder testbench |
-| 3.5 | `src/adder4.vhd` | 4-bit Adder |
-| 3.6 | `src/adder4_tb.vhd` | 4-bit Adder testbench |
-| 3.7 | `src/dec2to4.vhd` | 2-to-4 Decoder |
-| 3.8 | `src/dec2to4_tb.vhd` | 2-to-4 Decoder testbench |
-| 3.9 | `src/dec_4to16.vhd` | 4-to-16 Decoder |
-| 3.10 | `src/dec_4to16_tb.vhd` | 4-to-16 Decoder testbench |
-| 3.11 | `src/mux1.vhd` | 2-to-1 Multiplexer |
-| 3.12 | `src/mux_tb.vhd` | 2-to-1 Multiplexer testbench |
-| 3.13 | `src/mux_4to1.vhd` | 4-to-1 Multiplexer |
-| 3.14 | `src/mux_4to1_tb.vhd` | 4-to-1 Multiplexer testbench |
-| 3.15 | `src/mux_double_2to1.vhd` | Double 2-to-1 Multiplexer |
-| 3.16 | `src/mux_double_2to1_tb.vhd` | Double 2-to-1 Multiplexer testbench |
-| 4 | `README.md` | Repository overview and usage instructions |
+| 1.1 | `assign/Lab4b_UniWA-BSc-DSD_VHDL#2b.pdf` | Laboratory exercise description (English) |
+| 1.2 | `assign/Εργαστήριο4β_ΠΑΔΑ-ΣΨΣ_VHDL#2β.pdf` | Laboratory exercise description (Greek) |
+| 2 | `docs/` | Theoretical documentation on register files |
+| 2.1 | `docs/Register-Files.pdf` | Register files theory and architecture (English) |
+| 2.2 | `docs/Αρχεία-Καταχώρησης.pdf` | Register files theory and architecture (Greek) |
+| 3 | `src/` | VHDL source code implementations |
+| 3.1 | `src/reg8.vhd` | 8-bit register implementation |
+| 3.2 | `src/regfile.vhd` | Register file implementation |
+| 3.3 | `src/regfileUpd.vhd` | Updated register file implementation |
+| 4 | `waves/` | Simulation waveform outputs |
+| 4.1 | `waves/wave1.png` | Simulation waveform snapshot |
+| 4.2 | `waves/wave2.png` | Simulation waveform snapshot |
+| 4.3 | `waves/wave3.png` | Simulation waveform snapshot |
+| 4.4 | `waves/wave4.png` | Simulation waveform snapshot |
+| 4.5 | `waves/wave5.png` | Simulation waveform snapshot |
+| 4.6 | `waves/wave6.png` | Simulation waveform snapshot |
+| 4.7 | `waves/waveF*.bmp` | Register file simulation waveforms |
+| 4.8 | `waves/waveU*.bmp` | Updated register file simulation waveforms |
+| 5 | `README.md` | Repository overview and usage instructions |
 
 ---
 
+## Technical Specifications
 
-## Circuits Included
+### 1. Simple 4-Bit Register
 
-### Multiplexers
-- **2-in-1 Multiplexer:** Basic bit-level selection between two inputs.  
-- **Triple 2-in-1 Multiplexer:** Handles two 3-bit inputs controlled by a single select signal.  
-- **4-in-1 Multiplexer:** Selects one of four inputs using a 2-bit control signal.
+A **4-bit register** designed using **D-type flip-flops** with the following characteristics:
 
-### Decoders
-- **2-in-4 Decoder:** Standard 2-to-4 line decoding logic.  
-- **2-in-4 Decoder with Enable:** Includes an enable (`en`) signal; when disabled, all outputs remain `0`.  
-- **4-in-16 Decoder:** Extended decoder for larger-scale decoding operations.
+**Inputs**
+- **D:** 4-bit data input  
+- **Resetn:** Asynchronous active-low reset  
+- **Clock:** System clock  
 
-### Arithmetic Circuits
-- **Half Adder (Semi-Assimilator):** Performs basic addition of two single-bit inputs, producing Sum and Carry outputs.  
-- **Full Adder:** Adds two bits and a Carry-in (`Cin`) to produce Sum and Carry-out outputs.  
-- **4-Bit Adder:** A vector-based arithmetic unit that computes the sum of two 4-bit inputs, including overflow detection via Carry-out.
+**Outputs**
+- **Q:** 4-bit data output  
 
-## Simulation & Verification
+**Behavior**
+- On the **rising edge of the clock**, the input **D** is transferred to the output **Q**, provided `Resetn = '1'`.
+- If `Resetn = '0'`, the output is **immediately cleared** to `"0000"`.
 
-All designs are verified using **ModelSim Altera Starter Edition**, ensuring correctness through waveform analysis and systematic testbench execution.
+---
+
+### 2. Register File (4×4)
+
+A more advanced **register file** consisting of **four 4-bit registers**.
+
+**Generics**
+- **dw:** Data width (4 bits)  
+- **size:** Number of registers (4)  
+- **addrw:** Address width (2 bits)  
+
+**Interface**
+- **A:** Input data  
+- **Addr:** 2-bit address selecting the target register  
+- **we:** Write enable signal  
+- **clk:** System clock  
+- **C:** Output data from the selected register  
+
+---
+
+## Simulation Results
+
+The project includes **timing diagrams** verifying correct functionality for the following operations:
+
+| Operation        | Address | Data | Status   |
+|------------------|---------|------|----------|
+| Write Register   | 00      | 0101 | Verified |
+| Write Register   | 10      | 1101 | Verified |
+| Write Register   | 01      | 0010 | Verified |
+
+---
+
+## Implementation Details
+
+- **Language:** VHDL  
+- **Libraries Used:**
+  - `ieee.std_logic_1164`
+  - `ieee.numeric_std`
+- The **register file** utilizes an **array type (`regArray`)** to model internal storage elements, enabling scalable and clean design.
 
 ---
 
@@ -171,7 +201,7 @@ is recommended.
 
 Using Git:
 ```bash
-git clone https://github.com/Digital-Circuit-Design/VHDL.git
+git clone https://github.com/Digital-Circuit-Design/Register-Files.git
 ```
 
 #### Alternative (Without Git)
@@ -214,15 +244,7 @@ git clone https://github.com/Digital-Circuit-Design/VHDL.git
 ---
 
 ## Simulation & Verification
-### 1. Run a Testbench
-Each circuit has a corresponding testbench (`*_tb.vhd`).
-Example (Half Adder):
-1. Select `ha_tb` as the top-level entity
-2. Click Simulate → Start Simulation
-3. Choose `work.ha_tb`
-4. Click OK
-
-### 2. View Waveforms
+### 1. View Waveforms
 1. In the simulation window:
     - Add signals to the waveform
 2. Run simulation:
@@ -238,5 +260,5 @@ run -all
 ## Open the Documentation
 1. Navigate to the `docs/` directory
 2. Open the report corresponding to your preferred language:
-    - English: `Introduction-to-the-simulation-environment.txt`
-    - Greek: `Εισαγωγή-στο-περιβάλλον-προσομοίωσης.txt`
+    - English: `Register-Files.pdf`
+    - Greek: `Αρχεία-Καταχώρησης.pdf`
